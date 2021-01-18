@@ -7,7 +7,7 @@
  */
 
 
-namespace App\Http\Tools\Services;
+namespace Lsh\Services;
 use Elasticsearch\ClientBuilder;
 
 class ElasticSearchService {

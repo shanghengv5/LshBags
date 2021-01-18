@@ -5,7 +5,7 @@
  * @LastEditTime: 2020-12-19 18:38:17
  * @FilePath: /api/app/Http/Tools/Traits/Paginate.php
  */
-namespace App\Http\Tools\Traits\BaseService;
+namespace Lsh\Traits\BaseService;
 
 // 分页相关
 trait Paginate {

@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Tools\Traits\BaseService;
+namespace Lsh\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng

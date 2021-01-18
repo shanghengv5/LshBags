@@ -1,7 +1,12 @@
 {
     "name": "lsh/bags",
     "description": "This is a tool for curd",
-    "type": "l",
+    "type": "library",
+    "autoload": {
+    "psr-4": {
+        "Lsh\\": "src/"
+    }
+    },
     "require": {
         "laravel/laravel": "^6.0",
         "php": "^7.0"

@@ -1,10 +1,10 @@
 <?php
-namespace App\Http\Tools\Traits\BaseService;
+namespace Lsh\Traits\BaseService;
 /*
  * @Date: 2021-01-16 12:23:50
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-18 14:20:43
- * @FilePath: /api/app/Http/Tools/Traits/BaseService/Cache.php
+ * @LastEditTime: 2021-01-18 18:17:42
+ * @FilePath: /LshBags/src/Traits/BaseService/Cache.php
  */
 
 
