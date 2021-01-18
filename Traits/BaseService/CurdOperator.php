@@ -1,0 +1,210 @@
+<?php
+namespace App\Http\Tools\Traits\BaseService;
+/*
+ * @Date: 2020-12-07 15:57:48
+ * @LastEditors: LiShangHeng
+ * @LastEditTime: 2021-01-16 18:52:40
+ * @FilePath: /api/app/Http/Tools/Traits/BaseService/CurdOperator.php
+ */
+use Illuminate\Database\Eloquent\Model;
+
+// 增删改查
+Trait CurdOperator {
+    use Paginate, Filter, User, Cache;
+
+    /**
+     * 默认字段,否则orm模型在保存的可能会报错
+     * @var 
+     */
+    protected $defaultField = [
+        
+    ];
+
+    /**
+     * 设置限制字段
+     * @var 
+     */
+    protected $constraintField = [
+        'is_on' => 1
+    ];
+
+    /**
+     * orm模型
+     * @var 
+     */
+    public $model;
+
+    /**
+     * 获取详情
+     * @param Model $model 传入模型
+     * @param int $id 活动id
+     * @return object
+     */
+    public function details(int $id, $openCache = 1) 
+    {
+        $this->setConstraintField();
+        $data = $this->model->findOrFail($id);
+
+        /* 缓存相关 */
+        if($openCache) {
+            $cache = $this->getCache(__FUNCTION__);
+            $this->cacheId = $id;
+            $data = $cache ? $cache : $this->setCache($data->toArray(), __FUNCTION__);
+        }
+        return $data;
+    }
+
+    /**
+     * 获取列表
+     * @param Model $model 传入模型
+     * @param array $data 筛选数据
+     * @return
+     */
+    public function list($data, $openCache = 1) 
+    {
+        
+        /* 分页paginate */
+        $this->decidePage($data);
+        /* 过滤 */
+        $this->filters($data);
+        /* 设置默认限制 */
+        $this->setConstraintField();
+        
+        $list = $this->model;
+        $result =  $this->hasPage ? $list->paginate($this->pageNum) : $list->get();
+
+        /* 缓存相关 */
+        $cacheType = __FUNCTION__ . json_encode($data+$this->getPageData());
+        
+        if($openCache) {
+            $cache = $this->getCache($cacheType);
+            $result = $cache ? $cache : $this->setCache($result->toArray(), $cacheType);
+        }
+        
+        return $result;
+    }
+
+    /**
+     * @name: LiShangHeng
+     * @info: 获取翻页数据
+     * @param {*}
+     * @return array
+     */
+    public function getPageData() {
+        $pageData = request()->validate(['page' => '']);
+        return $pageData;
+    }
+
+    /**
+     * 添加数据
+     * @param Model $model 传入模型
+     * @param array $data 添加数据
+     * @return object $saveModel
+     */
+    public function add(array $data) 
+    {
+        $saveModel = $this->model->replicate();
+        $saveModel = $this->setDefault($saveModel);
+        $saveModel->fill($data);
+        $saveModel->saveOrFail();
+        /* 自动删除设定好的缓存 */
+        $this->autoDeleteCache();
+        return $saveModel;
+    }
+
+    /**
+     * 更新数据
+     * @param array $data 修改数据
+     * @param  int $id 
+     * @return Model $model 传入模型
+     */
+    public function change($id, array $data) 
+    {
+        $changeModel = $this->details($id, 0);
+        $this->setUpdataModel($changeModel,$data);
+        $changeModel->saveOrFail();
+        /* 缓存相关 */
+        $this->autoDeleteCache();
+        $this->cacheId = $id;
+        $cacheData = $changeModel->toArray();        
+        $this->setCache($cacheData, __FUNCTION__);
+        return $cacheData;
+    }
+
+    /**
+     * 删除
+     * @param Model $model 传入模型
+     * @param int $id 
+     * @return int $result
+     */
+    public function softDestroy($id) 
+    {
+        $result = $this->change($id, ['is_on' => 0]);
+        $this->autoDeleteCache();
+        return $result;
+    }
+
+    /**
+     * @name: LiShangHeng
+     * @msg: 设置更新模型的属性
+     * @param Model $model 传入模型
+     * @param array $data 修改数据
+     * @return Model $model 模型
+     */
+    private function setUpdataModel(Model $model,array $data) {
+        foreach($data as $key => $value) {
+            $model->{$key} = $value;
+        }
+        return $model;
+    }
+
+
+    /**
+     * @name: LiShangHeng
+     * @msg: 给模型设置默认值
+     * @param {*}
+     * @return {*}
+     */
+    public function setDefault($model) {
+        foreach($this->defaultField as $key => $value) {
+            $model->{$key} = $value;
+        }
+        return $model;
+    }
+
+    /**
+     * @name: LiShangHeng
+     * @msg: 设置默认限制字段
+     * @param {*}
+     * @return {*}
+     */
+    public function setConstraintField() {
+        $keys = array_keys($this->constraintField);
+        $this->filterEqual($this->constraintField, $keys);
+        return;
+    }
+
+    /**
+     * @name: LiShangHeng
+     * @msg: 设置创建者才能创建的模型
+     * @param {*}
+     * @return {*}
+     */
+    public function setCreatorModel($key = 'user_id') {
+        $this->setUserId();
+        $this->constraintField[$key] = $this->userId;
+        $this->defaultField[$key] = $this->userId;
+    }
+
+    /**
+     * @name: LiShangHeng
+     * @msg: 查询是否存在
+     * @param {*}
+     * @return {*}
+     */
+    public function checkModelExist(array $data, array $filterFields) {
+        $this->filterEqual($data, $filterFields);
+        $result = $this->model->exists();
+        return $result;
+    }
+}
