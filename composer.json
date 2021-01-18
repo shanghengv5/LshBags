@@ -1,0 +1,17 @@
+{
+    "name": "lsh/bags",
+    "description": "This is a tool for curd",
+    "type": "l",
+    "require": {
+        "laravel/laravel": "^6.0",
+        "php": "^7.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "李尚恒",
+            "email": "shanghengv5@163.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
