@@ -2,14 +2,14 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-19 16:45:44
- * @FilePath: /LshBags/src/ElasticSearch/ElasticSearchProvider.php
+ * @LastEditTime: 2021-01-19 16:59:40
+ * @FilePath: /LshBags/src/ElasticSearch/ElasticSearchServiceProvider.php
  */
-namespace Lsh\Core;
+namespace Lsh\ElasticSearch;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Artisan;
 
-class ElasticSearchServiceProvicer extends ServiceProvider{
+class ElasticSearchServiceProvider extends ServiceProvider{
     
     /**
      * 

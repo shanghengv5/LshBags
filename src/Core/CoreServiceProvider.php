@@ -9,7 +9,7 @@ namespace Lsh\Core;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Artisan;
 
-class CoreServiceProvicer extends ServiceProvider{
+class CoreServiceProvider extends ServiceProvider{
     
     /**
      * 
