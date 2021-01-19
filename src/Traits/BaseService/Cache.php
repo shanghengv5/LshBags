@@ -3,7 +3,7 @@ namespace Lsh\Traits\BaseService;
 /*
  * @Date: 2021-01-16 12:23:50
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-19 15:33:26
+ * @LastEditTime: 2021-01-19 15:36:20
  * @FilePath: /LshBags/src/Traits/BaseService/Cache.php
  */
 
@@ -92,9 +92,6 @@ Trait Cache {
     public function getCache($type) {
         $cacheKey = $this->getCacheKey($type);
         $cacheData = Redis::get($cacheKey);
-        // logger($cacheKey);
-        // logger('获取');
-        // logger($cacheData);
         return empty($cacheData) ? false : json_decode($cacheData, true);
     }
 
@@ -193,5 +190,16 @@ Trait Cache {
             $this->batchDelete($item);
         });
         return true;
+    }
+
+    /**
+     * @name: LiShangHeng
+     * @info: 获取翻页数据
+     * @param {*}
+     * @return array
+     */
+    public function getPageData() {
+        $pageData = request()->validate(['page' => '']);
+        return $pageData;
     }
 }

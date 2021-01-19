@@ -3,7 +3,7 @@ namespace Lsh\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-19 15:33:09
+ * @LastEditTime: 2021-01-19 15:40:26
  * @FilePath: /LshBags/src/Traits/BaseService/CurdOperator.php
  */
 use Illuminate\Database\Eloquent\Model;
@@ -73,10 +73,10 @@ Trait CurdOperator {
         $list = $this->model;
         $result =  $this->hasPage ? $list->paginate($this->pageNum) : $list->get();
 
-        /* 缓存相关 */
-        $cacheType = __FUNCTION__ . json_encode($data+$this->getPageData());
         
+        /* 缓存相关 */
         if($this->isOpenCache) {
+            $cacheType = __FUNCTION__ . json_encode($data+$this->getPageData());
             $cache = $this->getCache($cacheType);
             if($cache) {
                 $result = $cache;
@@ -86,17 +86,6 @@ Trait CurdOperator {
         }
         
         return $result;
-    }
-
-    /**
-     * @name: LiShangHeng
-     * @info: 获取翻页数据
-     * @param {*}
-     * @return array
-     */
-    public function getPageData() {
-        $pageData = request()->validate(['page' => '']);
-        return $pageData;
     }
 
     /**
@@ -112,7 +101,10 @@ Trait CurdOperator {
         $saveModel->fill($data);
         $saveModel->saveOrFail();
         /* 自动删除设定好的缓存 */
-        $this->autoDeleteCache();
+        if($this->isOpenCache) {
+             $this->autoDeleteCache();
+        }
+       
         return $saveModel;
     }
 
@@ -127,12 +119,16 @@ Trait CurdOperator {
         $changeModel = $this->details($id, 0);
         $this->setUpdataModel($changeModel,$data);
         $changeModel->saveOrFail();
+
+        $result = $changeModel;
         /* 缓存相关 */
-        $this->autoDeleteCache();
-        $this->cacheId = $id;
-        $cacheData = $changeModel->toArray();        
-        $this->setCache($cacheData, __FUNCTION__);
-        return $cacheData;
+        if($this->isOpenCache) {
+            $this->autoDeleteCache();
+            $this->cacheId = $id;
+            $result = $result->toArray();        
+            $this->setCache($result, __FUNCTION__);
+        }
+        return $result;
     }
 
     /**
@@ -144,7 +140,10 @@ Trait CurdOperator {
     public function softDestroy($id) 
     {
         $result = $this->change($id, ['is_on' => 0]);
-        $this->autoDeleteCache();
+        /* 自动删除设定好的缓存 */
+        if($this->isOpenCache) {
+             $this->autoDeleteCache();
+        }
         return $result;
     }
 
