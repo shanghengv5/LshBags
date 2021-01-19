@@ -2,15 +2,15 @@
 /*
  * @Date: 2020-10-26 16:16:08
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-18 18:17:06
- * @FilePath: /LshBags/src/Services/BaseService.php
+ * @LastEditTime: 2021-01-19 16:42:27
+ * @FilePath: /LshBags/src/core/BaseService.php
  */
 
-namespace Lsh\Services;
+namespace Lsh\Core;
 
 use Illuminate\Database\Eloquent\Model;
-use Lsh\Traits\BaseService\CurdOperator;
-use Lsh\Traits\BaseService\Privilege;
+use Lsh\Core\Traits\BaseService\CurdOperator;
+use Lsh\Core\Traits\BaseService\Privilege;
 
 use ReflectionClass;
 

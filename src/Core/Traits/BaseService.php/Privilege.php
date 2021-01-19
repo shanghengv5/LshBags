@@ -1,5 +1,5 @@
 <?php
-namespace Lsh\Traits\BaseService;
+namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng

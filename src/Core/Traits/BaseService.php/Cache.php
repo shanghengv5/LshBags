@@ -1,10 +1,10 @@
 <?php
-namespace Lsh\Traits\BaseService;
+namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2021-01-16 12:23:50
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-19 15:36:20
- * @FilePath: /LshBags/src/Traits/BaseService/Cache.php
+ * @LastEditTime: 2021-01-19 16:41:41
+ * @FilePath: /LshBags/src/Core/Traits/BaseService.php/Cache.php
  */
 
 

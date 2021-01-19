@@ -5,7 +5,7 @@
  * @LastEditTime: 2021-01-16 12:21:54
  * @FilePath: /api/app/Http/Tools/Traits/BaseService/Filter.php
  */
-namespace Lsh\Traits\BaseService;
+namespace Lsh\Core\Traits\BaseService;
 
 // 过滤
 trait Filter {

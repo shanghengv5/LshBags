@@ -1,6 +1,6 @@
 {
     "name": "lsh/bags",
-    "description": "This is a tool for curd",
+    "description": "This is a tool for laravel use",
     "type": "library",
     "autoload": {
     "psr-4": {
@@ -19,5 +19,10 @@
             "email": "shanghengv5@163.com"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": "Lsh\\Core\\CoreServiceProvider"
+        }
+    }
 }

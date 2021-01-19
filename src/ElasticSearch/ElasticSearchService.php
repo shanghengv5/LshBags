@@ -2,12 +2,12 @@
 /*
  * @Date: 2021-01-12 16:49:10
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-16 15:50:09
- * @FilePath: /api/app/Http/Tools/Services/ElasticSearchService.php
+ * @LastEditTime: 2021-01-19 16:44:50
+ * @FilePath: /LshBags/src/ElasticSearch/ElasticSearchService.php
  */
 
 
-namespace Lsh\Services;
+namespace Lsh\ElasticSearch;
 use Elasticsearch\ClientBuilder;
 
 class ElasticSearchService {

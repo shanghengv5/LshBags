@@ -1,10 +1,10 @@
 <?php
-namespace Lsh\Traits\BaseService;
+namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-16 12:06:00
- * @FilePath: /api/app/Http/Tools/Traits/BaseService/User.php
+ * @LastEditTime: 2021-01-19 16:42:05
+ * @FilePath: /LshBags/src/Core/Traits/BaseService.php/User.php
  */
 
  // 业务功能
