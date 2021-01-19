@@ -3,7 +3,7 @@ namespace Lsh\Traits\BaseService;
 /*
  * @Date: 2021-01-16 12:23:50
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-18 18:17:42
+ * @LastEditTime: 2021-01-19 15:33:26
  * @FilePath: /LshBags/src/Traits/BaseService/Cache.php
  */
 
@@ -44,9 +44,18 @@ Trait Cache {
     ];
 
     public function beginRedis() {
-        $ret = Redis::auth(config('database.redis.default.password'));
-        logger('开启redis');
-        logger($ret);
+        // $ret = Redis::auth(config('database.redis.default.password'));
+        try {
+            $ret = Redis::ping();
+            if(!$ret) {
+                logger('缓存开启');
+                $this->closeCache();
+            }
+        } catch(\Exception $e) {
+            logger('redis设置错误');
+            
+        }
+        
     }
 
     /**
@@ -83,7 +92,9 @@ Trait Cache {
     public function getCache($type) {
         $cacheKey = $this->getCacheKey($type);
         $cacheData = Redis::get($cacheKey);
-        
+        // logger($cacheKey);
+        // logger('获取');
+        // logger($cacheData);
         return empty($cacheData) ? false : json_decode($cacheData, true);
     }
 
@@ -94,25 +105,20 @@ Trait Cache {
      * @param string $type
      * @return {*}
      */
-    public function setCache($value, $type) {
+    public function setCache(array $value, $type) {
         // 这是模型名前缀,有修改数据操作,将删除模型名开头的所有缓存
         $cacheKey = $this->getCacheKey($type);
-        // logger('设置缓存');
-        // logger('value是'.$value);
-        // logger('type是'.$type);
         array_walk($this->autoDeleteCacheName, function($item) use($type, $cacheKey) {
             if(strpos($type, $item) !== false) {
                 $autokeys = $this->getAutoKey($item);
                 if(!$this->getCache($cacheKey)) {
                     // 用redis集合来管理自动删除的key
                     Redis::sadd($autokeys, $cacheKey);
-                    logger('添加自动键值'.$cacheKey);
                 }
                 
             }
         });
-        
-        Redis::set($cacheKey, $value);
+        Redis::set($cacheKey, json_encode($value));
         Redis::expire($cacheKey, $this->cacheTime);
         return $value;
     }
@@ -124,6 +130,8 @@ Trait Cache {
      * @return {*}
      */
     public function getCacheKey($type) {
+        // logger('看看key');
+        // logger($this->modelName);
         $modelNamePrefix = $this->modelName ?? 'all';
         $uniqueId = $this->cacheId ?? 0;
         return $modelNamePrefix . $this->delimiter . $uniqueId . $this->delimiter . $type;

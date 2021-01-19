@@ -3,8 +3,8 @@ namespace Lsh\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-16 18:52:40
- * @FilePath: /api/app/Http/Tools/Traits/BaseService/CurdOperator.php
+ * @LastEditTime: 2021-01-19 15:33:09
+ * @FilePath: /LshBags/src/Traits/BaseService/CurdOperator.php
  */
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,13 +40,13 @@ Trait CurdOperator {
      * @param int $id 活动id
      * @return object
      */
-    public function details(int $id, $openCache = 1) 
+    public function details(int $id) 
     {
         $this->setConstraintField();
         $data = $this->model->findOrFail($id);
 
         /* 缓存相关 */
-        if($openCache) {
+        if($this->isOpenCache) {
             $cache = $this->getCache(__FUNCTION__);
             $this->cacheId = $id;
             $data = $cache ? $cache : $this->setCache($data->toArray(), __FUNCTION__);
@@ -60,7 +60,7 @@ Trait CurdOperator {
      * @param array $data 筛选数据
      * @return
      */
-    public function list($data, $openCache = 1) 
+    public function list($data) 
     {
         
         /* 分页paginate */
@@ -76,9 +76,13 @@ Trait CurdOperator {
         /* 缓存相关 */
         $cacheType = __FUNCTION__ . json_encode($data+$this->getPageData());
         
-        if($openCache) {
+        if($this->isOpenCache) {
             $cache = $this->getCache($cacheType);
-            $result = $cache ? $cache : $this->setCache($result->toArray(), $cacheType);
+            if($cache) {
+                $result = $cache;
+            } else {
+                $result = $this->setCache($result->toArray(), $cacheType);
+            }
         }
         
         return $result;
