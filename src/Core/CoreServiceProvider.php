@@ -2,14 +2,14 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-19 16:51:51
+ * @LastEditTime: 2021-01-19 16:57:01
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Artisan;
 
-class AppServiceProvicer extends ServiceProvider{
+class CoreServiceProvicer extends ServiceProvider{
     
     /**
      * 
