@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:12:23
+ * @LastEditTime: 2021-01-21 18:19:04
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Artisan;
 use Lsh\Core\Console\EzController;
 use Lsh\Core\Console\EzCurd;
 use Lsh\Core\Console\EzService;
+use Lsh\Core\Console\EzModel;
 
 class CoreServiceProvider extends ServiceProvider {
     
