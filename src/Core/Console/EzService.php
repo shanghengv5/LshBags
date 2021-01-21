@@ -2,22 +2,22 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:04:57
- * @FilePath: /LshBags/src/Core/Console/EzController.php
+ * @LastEditTime: 2021-01-21 18:05:07
+ * @FilePath: /LshBags/src/Core/Console/EzService.php
  */
 
 namespace Lsh\Core\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-class EzController extends Command
+class EzService extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'ez:controller {name}';
+    protected $signature = 'ez:service {name}';
 
     /**
      * The console command description.
@@ -30,7 +30,7 @@ class EzController extends Command
      * 类型
      * @var 
      */
-    protected $type = 'Controller';
+    protected $type = 'Service';
 
     /**
      * 文件后缀
@@ -42,13 +42,19 @@ class EzController extends Command
      * 命名空间字符串
      * @var 
      */
-    protected $namespaceString = 'Http\\Controllers';
+    protected $namespaceString = 'Http\\Services';
 
     /**
      * 强制执行
      * @var 
      */
     protected $force = 0;
+
+    /**
+     * 是否使用前缀
+     * @var 
+     */
+    protected $hasPrefix = 0;
 
     /**
      * Create a new command instance.
@@ -78,19 +84,21 @@ class EzController extends Command
         $className = array_pop($nameArr);
 
         // 获取命名空间等基本信息
-        $namespace = $this->getNamespace($nameArr);
-        // 获取服务命名空间
-        $this->namespaceString = 'Http\\Services';
-        $servcieNameSpace = $this->getNamespace($nameArr, 0);
+        $namespace = $this->getNamespace($nameArr, 0);
+        $this->namespaceString = 'Model';
+        $modelNamespace = $this->getNamespace($nameArr, 0);
 
         // 获取stub文件
         $stubPath = $this->getStub();
         $stub = file_get_contents($stubPath);
 
         // 替换对应信息
-        $stub = str_replace(['EzClassName', 'EzNamespace', 'EzServcieNamespace'], [$className, $namespace, $servcieNameSpace], $stub);
+        $stub = str_replace(['EzClassName', 'EzNamespace', 'EzModelNamespace'], [$className, $namespace, $modelNamespace], $stub);
         
-        // 保存到对应目录
+        // 保存到对应目录,服务类不加前缀
+        if(!$this->hasPrefix) {
+            $name = $className;
+        }
         $filePath  = $this->getSavePath($name);
         // 判断是否存在
         if(!file_exists($filePath) || $this->force == 1) {
@@ -99,15 +107,8 @@ class EzController extends Command
         } else {
             $this->warn($filePath.'文件已经存在');
         }
-        
     }
 
-    /**
-     * @name: LiShangHeng
-     * @info: 创建目录
-     * @param {*} $path
-     * @return {*}
-     */
     public function dirExistOrCreate($path) {
         if(file_exists($path) == false) {
 
@@ -117,6 +118,8 @@ class EzController extends Command
                 $result = false;
             }
         }
+            
+        
         return $result;
     }
 
@@ -126,7 +129,7 @@ class EzController extends Command
      * @return string 
      */
     public function getStub() {
-        return __DIR__.'/stubs/EzController.stub';
+        return __DIR__.'/stubs/EzService.stub';
     }
 
     /**
@@ -175,6 +178,6 @@ class EzController extends Command
      * @return string
      */
     protected function getSavePath($name) {
-        return app_path('Http/Controllers/') . $name . $this->type . $this->fileExt;
+        return app_path('Http/Services/') . $name . $this->type . $this->fileExt;
     }
 }

@@ -1,0 +1,19 @@
+<?php
+
+namespace EzNamespace;
+
+use Illuminate\Database\Eloquent\Model;
+
+class EzClassNameModel extends Model
+{
+
+    protected $table = 'EzTableName';
+
+    //定义为时间戳
+    protected $dateFormat = 'U';
+
+    protected $casts = [
+        'id' => 'string',   //把id返回字符串
+    ];
+
+}

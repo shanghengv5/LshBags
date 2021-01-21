@@ -1,0 +1,15 @@
+<?php
+
+namespace EzNamespace;
+
+use Lsh\Core\BaseService;
+use EzModelNamespace\EzClassNameModel;
+
+class EzClassNameService extends BaseService
+{
+    function __construct($type = 'admin')
+    {
+        $model = new EzClassNameModel;
+        parent::__construct($model, $type);
+    }
+}
