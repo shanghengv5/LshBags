@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:05:07
+ * @LastEditTime: 2021-01-21 19:03:34
  * @FilePath: /LshBags/src/Core/Console/EzService.php
  */
 
@@ -10,18 +10,17 @@ namespace Lsh\Core\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+
 class EzService extends Command
 {
     /**
      * The name and signature of the console command.
-     *
      * @var string
      */
     protected $signature = 'ez:service {name}';
 
     /**
      * The console command description.
-     *
      * @var string
      */
     protected $description = '生成服务代码';

@@ -7,6 +7,42 @@ use EzModelNamespace\EzClassNameModel;
 
 class EzClassNameService extends BaseService
 {
+    /**
+     * 模糊查询
+     * @var 
+     */
+    protected $fuzzys = [];
+
+    /**
+     * 相等查询
+     * @var 
+     */
+    protected $equals = [];
+
+    /**
+     * 范围查询
+     * @var 
+     */
+    protected $betweens = [];
+
+    /**
+     * 范围查询取反
+     * @var 
+     */
+    protected $notBetweens = [];
+
+    /**
+     * 范围查询
+     * @var 
+     */
+    protected $ins = [];
+
+    /**
+     * 范围查询取反
+     * @var 
+     */
+    protected $notIns = [];
+
     function __construct($type = 'admin')
     {
         $model = new EzClassNameModel;

@@ -2,8 +2,8 @@
 /*
  * @Date: 2020-12-07 15:59:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-16 12:21:54
- * @FilePath: /api/app/Http/Tools/Traits/BaseService/Filter.php
+ * @LastEditTime: 2021-01-21 18:57:55
+ * @FilePath: /LshBags/src/Core/Traits/BaseService.php/Filter.php
  */
 namespace Lsh\Core\Traits\BaseService;
 
@@ -68,6 +68,9 @@ trait Filter {
         foreach($filterNames as $name) {
             if(isset($data[$name])) {
                 $this->model = $this->model->where($name, 'like', $this->fuzzyQuery($data[$name]));
+                if($dropData) {
+                    unset($data[$name]);
+                }
             }
         }
     }
