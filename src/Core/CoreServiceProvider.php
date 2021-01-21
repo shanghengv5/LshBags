@@ -2,14 +2,14 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-19 16:57:01
+ * @LastEditTime: 2021-01-21 10:50:38
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Artisan;
 
-class CoreServiceProvider extends ServiceProvider{
+class CoreServiceProvider extends ServiceProvider {
     
     /**
      * 
@@ -67,9 +67,9 @@ class CoreServiceProvider extends ServiceProvider{
      * @return {*}
      */
     public function publishesConfig() {
-        // 拼接地址
         $configArr = [];
         $tag = 'config';
+        
         foreach($this->configs as $key => $value) {
             $tag = $key;
             $configArr[$this->configPath($value)] = config_path($value);
