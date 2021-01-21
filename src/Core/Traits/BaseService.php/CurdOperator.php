@@ -3,8 +3,8 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-19 15:40:26
- * @FilePath: /LshBags/src/Traits/BaseService/CurdOperator.php
+ * @LastEditTime: 2021-01-21 18:33:10
+ * @FilePath: /LshBags/src/Core/Traits/BaseService.php/CurdOperator.php
  */
 use Illuminate\Database\Eloquent\Model;
 
@@ -202,7 +202,8 @@ Trait CurdOperator {
     /**
      * @name: LiShangHeng
      * @msg: 查询是否存在
-     * @param {*}
+     * @param array 查询数据
+     * @param array 需要查询的key值数组,这里只支持相等的查找
      * @return {*}
      */
     public function checkModelExist(array $data, array $filterFields) {
