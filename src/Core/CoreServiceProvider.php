@@ -2,12 +2,15 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 10:50:38
+ * @LastEditTime: 2021-01-21 18:12:23
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Artisan;
+use Lsh\Core\Console\EzController;
+use Lsh\Core\Console\EzCurd;
+use Lsh\Core\Console\EzService;
 
 class CoreServiceProvider extends ServiceProvider {
     
@@ -39,13 +42,16 @@ class CoreServiceProvider extends ServiceProvider {
     public function boot() {
         // 发布配置文件
         // $this->publishesConfig();
+        
         // 注册命令
-        // if ($this->app->runningInConsole()) {
-        //     $this->commands([
-        //         FooCommand::class,
-        //         BarCommand::class,
-        //     ]);
-        // }
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                EzController::class,
+                EzCurd::class,
+                EzService::class,
+                EzModel::class
+            ]);
+        }
         // 执行命令
         // Artisan::call('command');
 
