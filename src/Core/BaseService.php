@@ -2,8 +2,8 @@
 /*
  * @Date: 2020-10-26 16:16:08
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-19 16:42:27
- * @FilePath: /LshBags/src/core/BaseService.php
+ * @LastEditTime: 2021-01-21 18:28:45
+ * @FilePath: /LshBags/src/Core/BaseService.php
  */
 
 namespace Lsh\Core;
@@ -17,7 +17,6 @@ use ReflectionClass;
 class BaseService 
 {
     use CurdOperator, Privilege;
-    
     private $modelName;
     
     /**

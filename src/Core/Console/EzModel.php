@@ -2,8 +2,8 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:02:54
- * @FilePath: /api/app/Console/Commands/EzModel.php
+ * @LastEditTime: 2021-01-21 18:23:12
+ * @FilePath: /LshBags/src/Core/Console/EzModel.php
  */
 
 namespace Lsh\Core\Console;
@@ -24,7 +24,7 @@ class EzModel extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = '生成模型代码';
 
     /**
      * 类型

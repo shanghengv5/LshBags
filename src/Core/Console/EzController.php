@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:04:57
+ * @LastEditTime: 2021-01-21 18:23:05
  * @FilePath: /LshBags/src/Core/Console/EzController.php
  */
 
@@ -24,7 +24,7 @@ class EzController extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = '生成控制器代码';
 
     /**
      * 类型

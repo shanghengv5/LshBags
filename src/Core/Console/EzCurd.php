@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:10:57
+ * @LastEditTime: 2021-01-21 18:22:56
  * @FilePath: /LshBags/src/Core/Console/EzCurd.php
  */
 
@@ -23,7 +23,7 @@ class EzCurd extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = '简单的生成一套业务代码';
 
     /**
      * 强制执行

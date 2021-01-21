@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:19:04
+ * @LastEditTime: 2021-01-21 18:22:15
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -47,6 +47,7 @@ class CoreServiceProvider extends ServiceProvider {
         // 注册命令
         if ($this->app->runningInConsole()) {
             $this->commands([
+                // Ez业务功能,生成业务代码php文件
                 EzController::class,
                 EzCurd::class,
                 EzService::class,

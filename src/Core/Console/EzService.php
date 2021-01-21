@@ -24,7 +24,7 @@ class EzService extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = '生成服务代码';
 
     /**
      * 类型
