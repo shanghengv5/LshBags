@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 17:01:31
+ * @LastEditTime: 2021-01-22 19:20:42
  * @FilePath: /LshBags/src/Core/Console/EzController.php
  */
 
@@ -36,7 +36,7 @@ class EzController extends Command
     protected $type = 'Controller';
     protected $namespaceString = 'Http\\Controllers';
     protected $dirString = 'Http/Controllers/';
-    protected $needPrefix = 0;
+    protected $needPrefix = 1;
 
     /**
      * Create a new command instance.

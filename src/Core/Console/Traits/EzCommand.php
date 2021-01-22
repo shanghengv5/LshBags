@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-22 14:47:26
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 18:44:28
+ * @LastEditTime: 2021-01-22 19:21:18
  * @FilePath: /LshBags/src/Core/Console/Traits/EzCommand.php
  */
 
@@ -135,7 +135,6 @@ Trait EzCommand {
                 $prefix .= '\\' . Str::studly($value);
             }
         }
-        
         return $this->rootNamespace() . $this->namespaceString . $prefix;
     }
 
