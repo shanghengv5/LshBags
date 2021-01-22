@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 19:11:56
+ * @LastEditTime: 2021-01-22 19:13:32
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -33,19 +33,27 @@ class CoreServiceProvider extends ServiceProvider {
      */
     public function boot() {
         // 发布配置文件
-        // $this->publishesConfig('ezbags');
+        $this->publishesConfig('ezbags');
         
         // 注册命令
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                // Ez业务功能,生成业务代码php文件
-                EzController::class,
-                EzCurd::class,
-                EzService::class,
-                EzModel::class,
-                EzColumn::class,
-            ]);
-        }
+        // if ($this->app->runningInConsole()) {
+        //     $this->commands([
+        //         // Ez业务功能,生成业务代码php文件
+        //         EzController::class,
+        //         EzCurd::class,
+        //         EzService::class,
+        //         EzModel::class,
+        //         EzColumn::class,
+        //     ]);
+        // }
+        $this->commands([
+            // Ez业务功能,生成业务代码php文件
+            EzController::class,
+            EzCurd::class,
+            EzService::class,
+            EzModel::class,
+            EzColumn::class,
+        ]);
         // 执行命令
         // Artisan::call();
 
