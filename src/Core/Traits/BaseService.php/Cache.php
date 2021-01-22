@@ -3,7 +3,7 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2021-01-16 12:23:50
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 17:50:05
+ * @LastEditTime: 2021-01-22 17:58:55
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/Cache.php
  */
 
@@ -90,7 +90,7 @@ Trait Cache {
      */
     public function getCache($type) {
         $cacheKey = $this->getCacheKey($type);
-        logger($cacheKey);
+        // logger($cacheKey);
         $cacheData = Redis::get($cacheKey);
         return empty($cacheData) ? false : json_decode($cacheData, true);
     }
