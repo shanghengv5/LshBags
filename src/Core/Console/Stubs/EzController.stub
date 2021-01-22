@@ -93,7 +93,7 @@ class EzClassNameController extends Controller
     public function update($id, Request $request) {
         try {
             \DB::beginTransaction();
-            $changeData = $this->changeData($request);
+            $changeData = $this->updateData($request);
             $data = $this->service->change($id, $changeData);
             \DB::commit(); 
         } catch(\Exception $e) {

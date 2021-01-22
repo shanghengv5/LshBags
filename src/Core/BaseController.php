@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 10:38:02
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 17:20:09
+ * @LastEditTime: 2021-01-22 17:28:45
  * @FilePath: /LshBags/src/Core/BaseController.php
  */
 
@@ -48,9 +48,9 @@ Trait BaseController {
      * @param  Request $request 
      * @return array 
      */
-    private function changeData(Request $request)
+    private function updateData(Request $request)
     {
-        $requestData = $request->validate($this->changeRule);
+        $requestData = $request->validate($this->updateRule);
         return $requestData;
     }
     
