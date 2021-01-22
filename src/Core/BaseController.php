@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 10:38:02
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:26:03
+ * @LastEditTime: 2021-01-22 16:54:57
  * @FilePath: /LshBags/src/Core/BaseController.php
  */
 
@@ -11,7 +11,7 @@ namespace Lsh\Core;
 class BaseController {
 
     /**
-     * 
+     * 分页规则
      * @var 
      */
     protected $pageRule = [
@@ -54,13 +54,13 @@ class BaseController {
         return $requestData;
     }
     
-    /**
-     * @name: LiShangHeng
-     * @info: 返回一个laravel响应数据
-     * @param array $data
-     * @return {*}
-     */
-    public function response($data) {
-        return;
-    }
+    // /**
+    //  * @name: LiShangHeng
+    //  * @info: 返回一个laravel响应数据
+    //  * @param array $data
+    //  * @return {*}
+    //  */
+    // public function response($data) {
+    //     return;
+    // }
 }
