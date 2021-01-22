@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 19:13:32
+ * @LastEditTime: 2021-01-22 19:17:06
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -32,28 +32,21 @@ class CoreServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        // 发布配置文件
-        $this->publishesConfig('ezbags');
+        
         
         // 注册命令
-        // if ($this->app->runningInConsole()) {
-        //     $this->commands([
-        //         // Ez业务功能,生成业务代码php文件
-        //         EzController::class,
-        //         EzCurd::class,
-        //         EzService::class,
-        //         EzModel::class,
-        //         EzColumn::class,
-        //     ]);
-        // }
-        $this->commands([
-            // Ez业务功能,生成业务代码php文件
-            EzController::class,
-            EzCurd::class,
-            EzService::class,
-            EzModel::class,
-            EzColumn::class,
-        ]);
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                // Ez业务功能,生成业务代码php文件
+                EzController::class,
+                EzCurd::class,
+                EzService::class,
+                EzModel::class,
+                EzColumn::class,
+            ]);
+        }
+        // 发布配置文件
+        $this->publishesConfig('ezbags');
         // 执行命令
         // Artisan::call();
 
@@ -79,9 +72,9 @@ class CoreServiceProvider extends ServiceProvider {
             $this->configPath($value.$this->ext) => config_path($value.$this->ext)
         ], $this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->tag);
 
-        Artisan::call('vendor:publish', [
-            '--tag' => $this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->tag
-        ]);
+        // Artisan::call('vendor:publish', [
+        //     '--tag' => $this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->tag
+        // ]);
     }
 
     /**
