@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 18:59:24
+ * @LastEditTime: 2021-01-22 19:01:28
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -68,7 +68,7 @@ class CoreServiceProvider extends ServiceProvider {
      */
     public function publishesConfig($value) {
         $this->publishes([
-            $this->configPath($value.$this->ext) => config_path($value)
+            $this->configPath($value.$this->ext) => config_path($value.$this->ext)
         ], $this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->tag);
 
         Artisan::call('vendor:publish', [
