@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 18:29:31
+ * @LastEditTime: 2021-01-22 18:48:31
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -55,7 +55,7 @@ class CoreServiceProvider extends ServiceProvider {
             ]);
         }
         // 执行命令
-        // Artisan::call('command');
+        // Artisan::call();
 
     }
 
@@ -78,6 +78,8 @@ class CoreServiceProvider extends ServiceProvider {
         $this->publishes([
             $this->configPath($value) => config_path($value)
         ], $this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->tag);
+
+        Artisan::call('php artisan vendor:publish --tag='.$this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->tag);
     }
 
     /**
