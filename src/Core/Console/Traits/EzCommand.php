@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-22 14:47:26
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 17:03:03
+ * @LastEditTime: 2021-01-22 17:18:15
  * @FilePath: /LshBags/src/Core/Console/Traits/EzCommand.php
  */
 
@@ -28,12 +28,15 @@ Trait EzCommand {
         if(count($data) == 0) {
             $this->arguments = $this->arguments();
             $this->name = $this->arguments['name'];
+            if($this->hasOption('force')) {
+                $this->force = $this->option('force');
+            }
         } else {
             $this->arguments = $data;
             $this->name = $data['name'];
         }
-
-        $this->force = $this->option('force');
+        
+        
     }
 
     /**
