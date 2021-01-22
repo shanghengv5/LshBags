@@ -2,12 +2,13 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:22:15
+ * @LastEditTime: 2021-01-22 16:56:29
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Artisan;
+use Lsh\Core\Console\EzColumn;
 use Lsh\Core\Console\EzController;
 use Lsh\Core\Console\EzCurd;
 use Lsh\Core\Console\EzService;
@@ -51,7 +52,9 @@ class CoreServiceProvider extends ServiceProvider {
                 EzController::class,
                 EzCurd::class,
                 EzService::class,
-                EzModel::class
+                EzModel::class,
+                EzColumn::class,
+
             ]);
         }
         // 执行命令

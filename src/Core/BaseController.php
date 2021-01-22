@@ -2,13 +2,13 @@
 /*
  * @Date: 2021-01-21 10:38:02
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 16:54:57
+ * @LastEditTime: 2021-01-22 16:58:54
  * @FilePath: /LshBags/src/Core/BaseController.php
  */
 
 namespace Lsh\Core;
-
-class BaseController {
+use Illuminate\Support\Facades\Request;
+Trait BaseController {
 
     /**
      * 分页规则
