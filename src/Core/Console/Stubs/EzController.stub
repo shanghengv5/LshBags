@@ -15,25 +15,19 @@ class EzClassNameController extends Controller
      * 列表筛选规则
      * @var 
      */
-    protected $listRule = [
-
-    ];
+    protected $listRule = EzListRule;
 
     /**
      * 添加筛选规则
      * @var 
      */
-    protected $storeRule = [
-
-    ];
+    protected $storeRule = EzStoreRule;
 
     /**
      * 更新筛选规则
      * @var 
      */
-    protected $updateRule = [
-
-    ];
+    protected $updateRule = EzUpdateRule;
 
     /**
      * 服务对象
