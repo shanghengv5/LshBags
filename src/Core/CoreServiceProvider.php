@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 18:50:28
+ * @LastEditTime: 2021-01-22 18:54:09
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -15,15 +15,6 @@ use Lsh\Core\Console\EzService;
 use Lsh\Core\Console\EzModel;
 
 class CoreServiceProvider extends ServiceProvider {
-    
-    /**
-     * 
-     * @var 
-     */
-    protected $configs = [
-        // 'elasticsearch' => 'elasticsearch.php'
-        'ezbags' => 'ezbags.php'
-    ];
 
     /**
      * 
@@ -32,6 +23,7 @@ class CoreServiceProvider extends ServiceProvider {
     protected $bagPrefix = 'Lsh';
     protected $delimiter = '_';
     protected $tag = 'config';
+    protected $ext = '.php';
 
 
     /**
@@ -76,7 +68,7 @@ class CoreServiceProvider extends ServiceProvider {
      */
     public function publishesConfig($value) {
         $this->publishes([
-            $this->configPath($value) => config_path($value)
+            $this->configPath($value.$this->ext) => config_path($value)
         ], $this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->tag);
 
         Artisan::call('vendor:publish --tag='.$this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->tag);
