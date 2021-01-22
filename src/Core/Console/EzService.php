@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 17:02:23
+ * @LastEditTime: 2021-01-22 18:31:44
  * @FilePath: /LshBags/src/Core/Console/EzService.php
  */
 
@@ -26,9 +26,6 @@ class EzService extends Command
      * @var string
      */
     protected $description = 'Command description';
-
-    
-
     /**
      * 命名空间字符串
      * @var 

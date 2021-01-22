@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-22 14:47:26
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 17:18:15
+ * @LastEditTime: 2021-01-22 18:42:56
  * @FilePath: /LshBags/src/Core/Console/Traits/EzCommand.php
  */
 
@@ -17,6 +17,10 @@ Trait EzCommand {
     protected $arguments;
     protected $name;
     protected $className;
+    protected $config;
+    protected $configSetType = [
+        'service', 'model', 'controller'
+    ];
     protected $force = 0;
     protected $fileExt = '.php';
     
@@ -25,6 +29,9 @@ Trait EzCommand {
      * @info: 处理命令获取的基本信息
      */
     public function getCommandArguments($data = []) {
+        // 初始化配置
+        $this->initEzConfig();
+        // 初始化变量
         if(count($data) == 0) {
             $this->arguments = $this->arguments();
             $this->name = $this->arguments['name'];
@@ -35,8 +42,20 @@ Trait EzCommand {
             $this->arguments = $data;
             $this->name = $data['name'];
         }
-        
-        
+    }
+
+    /**
+     * @name: LiShangHeng
+     * @info: 获取ezbags配置
+     * @param {*}
+     * @return {*}
+     */
+    public function initEzConfig() {
+        $this->config = config('ezbags')['Console'];
+        // 设置命名空间
+        if(in_array($this->type, $this->configSetType)) {
+            $this->namespaceString = $this->config['namepace'][$this->type]; 
+        }
     }
 
     /**

@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 16:56:29
+ * @LastEditTime: 2021-01-22 18:29:31
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -22,6 +22,7 @@ class CoreServiceProvider extends ServiceProvider {
      */
     protected $configs = [
         // 'elasticsearch' => 'elasticsearch.php'
+        'ezbags' => 'ezbags.php'
     ];
 
     /**
@@ -29,12 +30,9 @@ class CoreServiceProvider extends ServiceProvider {
      * @var 
      */
     protected $bagPrefix = 'Lsh';
-
-    /**
-     * 
-     * @var 
-     */
     protected $delimiter = '_';
+    protected $tag = 'config';
+
 
     /**
      * 启动应用服务
@@ -43,7 +41,7 @@ class CoreServiceProvider extends ServiceProvider {
      */
     public function boot() {
         // 发布配置文件
-        // $this->publishesConfig();
+        $this->publishesConfig('ezbags');
         
         // 注册命令
         if ($this->app->runningInConsole()) {
@@ -54,7 +52,6 @@ class CoreServiceProvider extends ServiceProvider {
                 EzService::class,
                 EzModel::class,
                 EzColumn::class,
-
             ]);
         }
         // 执行命令
@@ -77,18 +74,10 @@ class CoreServiceProvider extends ServiceProvider {
      * @param {*}
      * @return {*}
      */
-    public function publishesConfig() {
-        $configArr = [];
-        $tag = 'config';
-        
-        foreach($this->configs as $key => $value) {
-            $tag = $key;
-            $configArr[$this->configPath($value)] = config_path($value);
-        }
+    public function publishesConfig($value) {
         $this->publishes([
-            // array_merge($configArr, $otherArr)
-            $configArr
-        ], $this->bagPrefix . $this->delimiter . $tag);
+            $this->configPath($value) => config_path($value)
+        ], $this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->tag);
     }
 
     /**
