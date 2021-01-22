@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 17:04:38
+ * @LastEditTime: 2021-01-22 19:07:54
  * @FilePath: /LshBags/src/Core/Console/EzCurd.php
  */
 
@@ -66,7 +66,5 @@ class EzCurd extends Command
             '--force' => $this->force
         ]);
     }
-
-
     
 }
