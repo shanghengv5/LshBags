@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 18:57:04
+ * @LastEditTime: 2021-01-22 18:59:24
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -97,7 +97,7 @@ class CoreServiceProvider extends ServiceProvider {
      * @return string
      */
     private function configPath($filepath) {
-        $dir = __DIR__.'/../config';
+        $dir = __DIR__.'/config';
         return $dir .'/'. $filepath;
     }
 }
