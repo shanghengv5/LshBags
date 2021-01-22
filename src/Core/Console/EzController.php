@@ -2,14 +2,14 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 16:47:37
+ * @LastEditTime: 2021-01-22 17:01:31
  * @FilePath: /LshBags/src/Core/Console/EzController.php
  */
 
 namespace Lsh\Core\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
+use Lsh\Core\Console\Traits\EzCommand;
 use Lsh\Core\Console\EzColumn;
 
 class EzController extends Command
@@ -20,7 +20,7 @@ class EzController extends Command
      *
      * @var string
      */
-    protected $signature = 'ez:controller {name}';
+    protected $signature = 'ez:controller {name} {--force=0}';
 
     /**
      * The console command description.

@@ -2,13 +2,13 @@
 /*
  * @Date: 2021-01-22 11:56:45
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 16:47:21
+ * @LastEditTime: 2021-01-22 17:03:23
  * @FilePath: /LshBags/src/Core/Console/EzColumn.php
  */
 
 namespace Lsh\Core\Console;
 use Illuminate\Console\Command;
-
+use Lsh\Core\Console\Traits\EzCommand;
 class EzColumn extends Command
 {
     use EzCommand;

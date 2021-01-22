@@ -2,13 +2,14 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 16:47:59
+ * @LastEditTime: 2021-01-22 17:04:38
  * @FilePath: /LshBags/src/Core/Console/EzCurd.php
  */
 
 namespace Lsh\Core\Console;
 
 use Illuminate\Console\Command;
+use Lsh\Core\Console\Traits\EzCommand;
 class EzCurd extends Command
 {
     use EzCommand;
@@ -17,7 +18,7 @@ class EzCurd extends Command
      *
      * @var string
      */
-    protected $signature = 'ez:curd {name}';
+    protected $signature = 'ez:curd {name} {--force=0}';
 
     /**
      * The console command description.
@@ -61,7 +62,8 @@ class EzCurd extends Command
      */
     public function callEzCommand($type) {
         $this->call($this->commandPrefix.$type, [
-            'name' => $this->name
+            'name' => $this->name,
+            '--force' => $this->force
         ]);
     }
 

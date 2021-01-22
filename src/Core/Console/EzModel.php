@@ -2,14 +2,15 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 16:47:06
- * @FilePath: /api/vendor/lsh/bags/src/Core/Console/EzModel.php
+ * @LastEditTime: 2021-01-22 17:01:56
+ * @FilePath: /LshBags/src/Core/Console/EzModel.php
  */
 
 namespace Lsh\Core\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Lsh\Core\Console\Traits\EzCommand;
 class EzModel extends Command
 {
     use EzCommand;
@@ -18,7 +19,7 @@ class EzModel extends Command
      *
      * @var string
      */
-    protected $signature = 'ez:model {name}';
+    protected $signature = 'ez:model {name} {--force=0}';
 
     /**
      * The console command description.

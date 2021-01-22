@@ -2,11 +2,11 @@
 /*
  * @Date: 2021-01-22 14:47:26
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 16:49:42
- * @FilePath: /LshBags/src/Core/Console/EzCommand.php
+ * @LastEditTime: 2021-01-22 17:03:03
+ * @FilePath: /LshBags/src/Core/Console/Traits/EzCommand.php
  */
 
-namespace Lsh\Core\Console;
+namespace Lsh\Core\Console\Traits;
 use Illuminate\Support\Str;
 
 Trait EzCommand {
@@ -32,6 +32,8 @@ Trait EzCommand {
             $this->arguments = $data;
             $this->name = $data['name'];
         }
+
+        $this->force = $this->option('force');
     }
 
     /**
