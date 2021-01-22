@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 19:01:28
+ * @LastEditTime: 2021-01-22 19:11:56
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -33,7 +33,7 @@ class CoreServiceProvider extends ServiceProvider {
      */
     public function boot() {
         // 发布配置文件
-        $this->publishesConfig('ezbags');
+        // $this->publishesConfig('ezbags');
         
         // 注册命令
         if ($this->app->runningInConsole()) {
