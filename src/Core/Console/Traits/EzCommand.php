@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-22 14:47:26
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 18:42:56
+ * @LastEditTime: 2021-01-22 18:44:28
  * @FilePath: /LshBags/src/Core/Console/Traits/EzCommand.php
  */
 
@@ -47,14 +47,12 @@ Trait EzCommand {
     /**
      * @name: LiShangHeng
      * @info: 获取ezbags配置
-     * @param {*}
-     * @return {*}
      */
     public function initEzConfig() {
         $this->config = config('ezbags')['Console'];
         // 设置命名空间
         if(in_array($this->type, $this->configSetType)) {
-            $this->namespaceString = $this->config['namepace'][$this->type]; 
+            $this->namespaceString = $this->config['namepace'][Str::lower($this->type)]; 
         }
     }
 
