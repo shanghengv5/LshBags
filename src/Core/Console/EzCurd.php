@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:22:56
+ * @LastEditTime: 2021-01-22 16:47:59
  * @FilePath: /LshBags/src/Core/Console/EzCurd.php
  */
 
@@ -11,6 +11,7 @@ namespace Lsh\Core\Console;
 use Illuminate\Console\Command;
 class EzCurd extends Command
 {
+    use EzCommand;
     /**
      * The name and signature of the console command.
      *
@@ -23,15 +24,12 @@ class EzCurd extends Command
      *
      * @var string
      */
-    protected $description = '简单的生成一套业务代码';
-
+    protected $description = 'Command description';
     /**
-     * 强制执行
+     * 命令前缀
      * @var 
      */
-    protected $force = 0;
-
-
+    protected $commandPrefix = 'ez:';
     /**
      * Create a new command instance.
      *
@@ -49,21 +47,21 @@ class EzCurd extends Command
      */
     public function handle()
     {
-        // 处理命令获取的基本信息
-        $arguments = $this->arguments();
-        $name = $arguments['name'];
+        $this->getCommandArguments();
 
         // 调动服务
-        $this->call('ez:controller', [
-            'name' => $name
-        ]);
-        // 调动服务
-        $this->call('ez:service', [
-            'name' => $name
-        ]);
-        // 调动模型
-        $this->call('ez:model', [
-            'name' => $name
+        $this->callEzCommand('controller');
+        $this->callEzCommand('service');
+        $this->callEzCommand('model');
+    }
+
+    /**
+     * @name: LiShangHeng
+     * @info: 调用对应命令
+     */
+    public function callEzCommand($type) {
+        $this->call($this->commandPrefix.$type, [
+            'name' => $this->name
         ]);
     }
 
