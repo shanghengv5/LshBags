@@ -3,7 +3,7 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:33:10
+ * @LastEditTime: 2021-01-22 17:35:33
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/CurdOperator.php
  */
 use Illuminate\Database\Eloquent\Model;
@@ -53,6 +53,8 @@ Trait CurdOperator {
         }
         return $data;
     }
+
+    
 
     /**
      * 获取列表
@@ -116,7 +118,7 @@ Trait CurdOperator {
      */
     public function change($id, array $data) 
     {
-        $changeModel = $this->details($id, 0);
+        $changeModel = $this->detailsInstance($id);
         $this->setUpdataModel($changeModel,$data);
         $changeModel->saveOrFail();
 
@@ -210,5 +212,17 @@ Trait CurdOperator {
         $this->filterEqual($data, $filterFields);
         $result = $this->model->exists();
         return $result;
+    }
+
+    /**
+     * 获取详情模型
+     * @param Model $model 传入模型
+     * @param int $id 活动id
+     * @return object
+     */
+    private function detailsInstance(int $id) {
+        $this->setConstraintField();
+        $data = $this->model->findOrFail($id);
+        return $data;
     }
 }
