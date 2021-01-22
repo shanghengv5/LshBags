@@ -3,7 +3,7 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 17:35:33
+ * @LastEditTime: 2021-01-22 17:49:45
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/CurdOperator.php
  */
 use Illuminate\Database\Eloquent\Model;
@@ -78,9 +78,11 @@ Trait CurdOperator {
         
         /* 缓存相关 */
         if($this->isOpenCache) {
+            // logger('进入缓存');
             $cacheType = __FUNCTION__ . json_encode($data+$this->getPageData());
             $cache = $this->getCache($cacheType);
             if($cache) {
+                
                 $result = $cache;
             } else {
                 $result = $this->setCache($result->toArray(), $cacheType);

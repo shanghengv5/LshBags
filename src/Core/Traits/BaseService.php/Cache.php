@@ -3,7 +3,7 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2021-01-16 12:23:50
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-19 16:41:41
+ * @LastEditTime: 2021-01-22 17:50:05
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/Cache.php
  */
 
@@ -27,7 +27,7 @@ Trait Cache {
      * 缓存时间
      * @var 
      */
-    protected $cacheTime = 60 * 24;
+    protected $cacheTime = 60 * 3;
 
     /**
      * 缓存id
@@ -48,12 +48,11 @@ Trait Cache {
         try {
             $ret = Redis::ping();
             if(!$ret) {
-                logger('缓存开启');
+                logger('缓存关闭');
                 $this->closeCache();
             }
         } catch(\Exception $e) {
             logger('redis设置错误');
-            
         }
         
     }
@@ -91,6 +90,7 @@ Trait Cache {
      */
     public function getCache($type) {
         $cacheKey = $this->getCacheKey($type);
+        logger($cacheKey);
         $cacheData = Redis::get($cacheKey);
         return empty($cacheData) ? false : json_decode($cacheData, true);
     }
@@ -112,7 +112,6 @@ Trait Cache {
                     // 用redis集合来管理自动删除的key
                     Redis::sadd($autokeys, $cacheKey);
                 }
-                
             }
         });
         Redis::set($cacheKey, json_encode($value));
@@ -153,10 +152,9 @@ Trait Cache {
      * @param {*} $type
      * @return {*}
      */
-    public function deleteCache($type) {
-        $cacheKey = $this->getCacheKey($type);
-        Redis::del($cacheKey);
-        return true;
+    public function deleteCache($key) {        
+        $result = Redis::del($key);
+        return $result;
     }
 
     /**
@@ -173,7 +171,6 @@ Trait Cache {
         foreach($set as $key) {
             // logger('批量删除中'.$key);
             $this->deleteCache($key);
-            
         }
 
     }
@@ -187,6 +184,7 @@ Trait Cache {
      */
     public function autoDeleteCache() {
         array_walk($this->autoDeleteCacheName, function($item) {
+            // logger('删除缓存');
             $this->batchDelete($item);
         });
         return true;
