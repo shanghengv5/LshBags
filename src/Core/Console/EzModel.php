@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-23 19:02:22
+ * @LastEditTime: 2021-01-23 19:04:28
  * @FilePath: /LshBags/src/Core/Console/EzModel.php
  */
 
@@ -87,8 +87,8 @@ class EzModel extends Command
      */
     public function replaceMedia() {
         $media = new EzModelMedia;
-        $ezMedia = $media->runByCommand($this->arguments());
-        var_export($ezMedia);
+        $ezMedia = $media->runByCommand($this->arguments);
+        // var_dump($ezMedia);
         $this->stub = str_replace(['EzAutoMedia'], [$ezMedia], $this->stub);
     }
 
