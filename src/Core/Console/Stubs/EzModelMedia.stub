@@ -1,0 +1,16 @@
+
+    public function getEzMediaAttribute($value) {
+        load_helper('File');
+        return auto_url($value);
+    }
+
+    public function setEzMediaAttribute($value) {
+        if(is_numeric($value)) {
+            $upload = EzNamespace\UploadModel::findOrFail($value);
+            $saveValue = $upload->path;
+        } else {
+            $saveValue = $value;
+        }
+        $this->attributes['EzMedia'] = $saveValue;
+    }
+

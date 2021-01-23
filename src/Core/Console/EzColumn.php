@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-22 11:56:45
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 17:03:23
+ * @LastEditTime: 2021-01-23 18:27:51
  * @FilePath: /LshBags/src/Core/Console/EzColumn.php
  */
 
@@ -113,9 +113,9 @@ class EzColumn extends Command
      * @name: LiShangHeng
      * @info: 返回可用信息
      * @param  $type
-     * @return string
+     * @return mixed
      */
-    public function exportAndReturn($type = 'list') {
+    public function exportAndReturn($type = 'list', $isString = true) {
         switch ($type) {
             case 'list':
                 $info = var_export($this->listRule, true);
@@ -128,6 +128,10 @@ class EzColumn extends Command
                 break;
             case 'model':
                 $info = var_export($this->modelMap, true);
+                if(!$isString) {
+                    $info = $this->modelMap;
+                }
+                // $info = var_export($this->modelMap, true);
                 break;
             default:
                 $info = var_export($this->listRule, true);
@@ -170,8 +174,6 @@ class EzColumn extends Command
             $this->dealModel($key, $comment);
         }
     }
-
-    
 
     /**
      * @name: LiShangHeng

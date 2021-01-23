@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 19:17:06
+ * @LastEditTime: 2021-01-23 18:37:38
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -13,6 +13,7 @@ use Lsh\Core\Console\EzController;
 use Lsh\Core\Console\EzCurd;
 use Lsh\Core\Console\EzService;
 use Lsh\Core\Console\EzModel;
+use Lsh\Core\Console\EzModelMedia;
 
 class CoreServiceProvider extends ServiceProvider {
 
@@ -43,6 +44,7 @@ class CoreServiceProvider extends ServiceProvider {
                 EzService::class,
                 EzModel::class,
                 EzColumn::class,
+                EzModelMedia::class,
             ]);
         }
         // 发布配置文件
