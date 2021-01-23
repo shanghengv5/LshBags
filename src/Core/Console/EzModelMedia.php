@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-23 18:34:14
+ * @LastEditTime: 2021-01-23 19:02:13
  * @FilePath: /LshBags/src/Core/Console/EzModelMedia.php
  */
 
@@ -41,7 +41,7 @@ class EzModelMedia extends Command
     protected $namespaceString = 'Model';
     protected $dirString = 'Model/';
     protected $needPrefix = 0;
-    protected $mediaInfo = '';
+    protected $mediaInfo = "";
 
 
     /**
@@ -79,7 +79,7 @@ class EzModelMedia extends Command
      * @info: 打印可用信息
      */
     public function exportInfo($isString = false) {
-        var_export($this->mediaInfo, $isString);
+        return var_dump($this->mediaInfo, $isString);
     }
 
     /**
@@ -90,14 +90,14 @@ class EzModelMedia extends Command
      */
     public function runByCommand($data) {
         $this->getCommandArguments($data);
-        $this->dealNameArguments();   
+        $this->dealNameArguments();
         
         $this->getStubContext();
         $this->replaceMoreNamespace();
         
         $this->replaceNamespace();
 
-        return $this->exportInfo(true);
+        return $this->mediaInfo;
     }
 
     /**
@@ -111,9 +111,11 @@ class EzModelMedia extends Command
         $modelMap = $ezColumn->exportAndReturn('model', false);
         foreach($modelMap as $key => $value) {
             if($value == 'media') {
-                $this->mediaInfo .= str_replace(['EzMedia'], [$this->studlyName($key)], $this->stub);
+                $nameArr = [$key];
+                $this->mediaInfo .= str_replace(['EzMedia', 'EzNamespace', 'EzSnake'], [$this->studlyName($nameArr), $this->namespace, $key], $this->stub);
             }
         }
+        
     }
 
 

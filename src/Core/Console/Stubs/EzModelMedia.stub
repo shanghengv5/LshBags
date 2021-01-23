@@ -6,11 +6,11 @@
 
     public function setEzMediaAttribute($value) {
         if(is_numeric($value)) {
-            $upload = EzNamespace\UploadModel::findOrFail($value);
+            $upload = \EzNamespace\UploadModel::findOrFail($value);
             $saveValue = $upload->path;
         } else {
             $saveValue = $value;
         }
-        $this->attributes['EzMedia'] = $saveValue;
+        $this->attributes['EzSnake'] = $saveValue;
     }
 

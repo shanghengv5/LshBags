@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 16:24:43
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-23 17:19:43
+ * @LastEditTime: 2021-01-23 19:02:22
  * @FilePath: /LshBags/src/Core/Console/EzModel.php
  */
 
@@ -67,6 +67,7 @@ class EzModel extends Command
         // replace by yourself
         $this->replaceMoreNamespace();
         
+        $this->replaceMedia();
         $this->replaceNamespace();
         $this->saveStubContext();
     }
@@ -80,6 +81,16 @@ class EzModel extends Command
         $this->stub = str_replace(['EzTableName'], [$ezTableName], $this->stub);
     }
 
+    /**
+     * @name: LiShangHeng
+     * @info: 替换media
+     */
+    public function replaceMedia() {
+        $media = new EzModelMedia;
+        $ezMedia = $media->runByCommand($this->arguments());
+        var_export($ezMedia);
+        $this->stub = str_replace(['EzAutoMedia'], [$ezMedia], $this->stub);
+    }
 
     /**
      * The stub file path.
