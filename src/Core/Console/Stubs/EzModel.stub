@@ -11,7 +11,7 @@ class EzClassNameModel extends Model
 
     //定义为时间戳
     protected $dateFormat = 'U';
-
+    protected $guarded = [];
     protected $casts = [
         'id' => 'string',   //把id返回字符串
     ];

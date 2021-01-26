@@ -3,7 +3,7 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 17:59:21
+ * @LastEditTime: 2021-01-26 18:38:40
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/CurdOperator.php
  */
 use Illuminate\Database\Eloquent\Model;
@@ -223,7 +223,7 @@ Trait CurdOperator {
      * @param int $id 活动id
      * @return object
      */
-    private function detailsInstance(int $id) {
+    protected function detailsInstance(int $id) {
         $this->setConstraintField();
         $data = $this->model->findOrFail($id);
         return $data;
