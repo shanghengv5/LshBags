@@ -3,9 +3,12 @@
     "description": "This is a tool for laravel use",
     "type": "library",
     "autoload": {
-    "psr-4": {
-        "Lsh\\": "src/"
-    }
+        "psr-4": {
+            "Lsh\\": "src/"
+        },
+        "files": [
+            "src/helper/Ezbags.php"
+        ]
     },
     "require": {
         "php": "^7.0",

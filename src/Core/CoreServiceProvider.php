@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-29 12:27:29
+ * @LastEditTime: 2021-01-29 14:15:26
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -51,7 +51,7 @@ class CoreServiceProvider extends ServiceProvider {
         // 发布配置文件
         $this->publishesConfig('ezbags');
         // 发布helper 强制覆盖
-        $this->publishesHelper('ezbags');
+        // $this->publishesHelper('ezbags');
 
         // 执行命令
         // Artisan::call();
