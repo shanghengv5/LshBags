@@ -2,8 +2,8 @@
 /*
  * @Date: 2021-01-21 14:09:18
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-29 12:20:04
- * @FilePath: /LshBags/src/Core/helper/ezbagsHelper.php
+ * @LastEditTime: 2021-01-29 15:03:50
+ * @FilePath: /LshBags/src/Core/helper/ezbags.php
  */
 
 if(!function_exists('array_insert')) {
@@ -64,7 +64,7 @@ if(!function_exists('array_move')) {
      * @param integer $insert 被插入的元素
      */
     function array_move(&$array, $index, $insert) {
-        if($insert > count($array) || $index < 0) {
+        if($insert >= count($array) || $index < 0) {
             return;
         }
         // 取出到插入元素的数组,不包括插入元素

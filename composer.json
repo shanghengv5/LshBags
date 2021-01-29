@@ -5,10 +5,8 @@
     "autoload": {
         "psr-4": {
             "Lsh\\": "src/"
-        },
-        "files": [
-            "src/Core/helper/Ezbags.php"
-        ]
+        }
+        
     },
     "require": {
         "php": "^7.0",
