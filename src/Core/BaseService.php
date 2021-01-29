@@ -2,7 +2,7 @@
 /*
  * @Date: 2020-10-26 16:16:08
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-29 10:27:36
+ * @LastEditTime: 2021-01-29 10:28:18
  * @FilePath: /LshBags/src/Core/BaseService.php
  */
 
@@ -20,11 +20,7 @@ class BaseService
     use CurdOperator, Privilege, Config, Renew;
     private $modelName;
     
-    /**
-     * 是否需要重置模型
-     * @var 
-     */
-    protected $needRenew = 0;
+    
 
     function __construct(Model $model, string $type)
     {

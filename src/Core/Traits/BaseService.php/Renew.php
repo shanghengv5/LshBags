@@ -3,13 +3,19 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2021-01-16 12:23:50
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-29 10:27:13
+ * @LastEditTime: 2021-01-29 10:28:10
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/Renew.php
  */
 
 
 // 用于自动设置缓存
 Trait Renew {
+    /**
+     * 是否需要重置模型
+     * @var 
+     */
+    protected $needRenew = 0;
+    
     /**
      * @name: LiShangHeng
      * @msg: 重置模型
