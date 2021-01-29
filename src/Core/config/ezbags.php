@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-22 18:25:05
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 18:36:22
+ * @LastEditTime: 2021-01-29 10:18:15
  * @FilePath: /LshBags/src/Core/config/ezbags.php
  */
 
@@ -16,6 +16,11 @@ return [
             'controller' => 'Http\\Controllers'
         ]
     ],
-
-    
+    // BaseService 配置
+    'BaseService' => [
+        // 缓存
+        'redis' => [
+            'isOpen' => false,
+        ]
+    ]
 ];

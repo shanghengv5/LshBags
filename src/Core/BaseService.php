@@ -2,7 +2,7 @@
 /*
  * @Date: 2020-10-26 16:16:08
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:28:45
+ * @LastEditTime: 2021-01-29 10:27:36
  * @FilePath: /LshBags/src/Core/BaseService.php
  */
 
@@ -11,12 +11,13 @@ namespace Lsh\Core;
 use Illuminate\Database\Eloquent\Model;
 use Lsh\Core\Traits\BaseService\CurdOperator;
 use Lsh\Core\Traits\BaseService\Privilege;
-
+use Lsh\Core\Traits\BaseService\Config;
+use Lsh\Core\Traits\BaseService\Renew;
 use ReflectionClass;
 
 class BaseService 
 {
-    use CurdOperator, Privilege;
+    use CurdOperator, Privilege, Config, Renew;
     private $modelName;
     
     /**
@@ -31,53 +32,15 @@ class BaseService
         $reflect = new ReflectionClass($model);
         $this->modelName = $reflect->getName();
         
-        /* 写入 */
+        /* 设置 */
         $this->model = $model;
         $this->type = $type;
         
-        /* redis认证 */
-        $this->beginRedis();
+        $this->setConfig();
     }
 
-    /**
-     * @name: LiShangHeng
-     * @msg: 重置模型
-     * @return bool
-     */
-    public function renew() {
-        $this->model = new $this->modelName;
-        return true;
-    }
+    
 
-    /**
-     * @name: LiShangHeng
-     * @msg: 设置另一个模型来使用这个基础类
-     * @param Model $model
-     * @return bool
-     */
-    public function setOtherModel(Model $model) {
-        $this->model = $model;
-        return true;
-    }
-
-    /**
-     * @name: LiShangHeng
-     * @info: 判断是否需要重置模型
-     */
-    public function autoNeedRenew() {
-        if($this->needRenew != 0) {
-            $this->renew();
-        }
-        $this->setNeedRenew();
-    }
-
-    /**
-     * @name: LiShangHeng
-     * @info: 设置需要重置属性值
-     * @param integer $val
-     */
-    public function setNeedRenew($val = 1) {
-        $this->needRenew = $val;
-    }
+    
     
 }

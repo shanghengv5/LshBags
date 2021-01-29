@@ -3,7 +3,7 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2021-01-16 12:23:50
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 17:58:55
+ * @LastEditTime: 2021-01-29 10:22:30
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/Cache.php
  */
 
@@ -43,18 +43,23 @@ Trait Cache {
         'list'
     ];
 
+    /**
+     * @name: LiShangHeng
+     * @info: 判断redis是否可用
+     */
     public function beginRedis() {
         // $ret = Redis::auth(config('database.redis.default.password'));
         try {
-            $ret = Redis::ping();
-            if(!$ret) {
-                logger('缓存关闭');
-                $this->closeCache();
+            if($this->openCache) {
+                $ret = Redis::ping();
+                if(!$ret) {
+                    logger('缓存关闭');
+                    $this->closeCache();
+                }
             }
         } catch(\Exception $e) {
             logger('redis设置错误');
         }
-        
     }
 
     /**
@@ -62,7 +67,7 @@ Trait Cache {
      * @info: 设置是否开启缓存
      * @return {*}
      */
-    public function setOpenCache($val) {
+    private function setOpenCache($val) {
         $this->openCache = $val;
     }
 
