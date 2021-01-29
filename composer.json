@@ -7,7 +7,7 @@
             "Lsh\\": "src/"
         },
         "files": [
-            "src/helper/Ezbags.php"
+            "src/Core/helper/Ezbags.php"
         ]
     },
     "require": {
