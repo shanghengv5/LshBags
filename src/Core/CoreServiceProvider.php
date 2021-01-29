@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-19 15:49:40
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-23 18:37:38
+ * @LastEditTime: 2021-01-29 12:27:29
  * @FilePath: /LshBags/src/Core/CoreServiceProvider.php
  */
 namespace Lsh\Core;
@@ -23,8 +23,9 @@ class CoreServiceProvider extends ServiceProvider {
      */
     protected $bagPrefix = 'Lsh';
     protected $delimiter = '_';
-    protected $tag = 'config';
     protected $ext = '.php';
+    protected $configTag = 'config';
+    protected $helperTag = 'helper';
 
 
     /**
@@ -49,6 +50,9 @@ class CoreServiceProvider extends ServiceProvider {
         }
         // 发布配置文件
         $this->publishesConfig('ezbags');
+        // 发布helper 强制覆盖
+        $this->publishesHelper('ezbags');
+
         // 执行命令
         // Artisan::call();
 
@@ -72,11 +76,18 @@ class CoreServiceProvider extends ServiceProvider {
     public function publishesConfig($value) {
         $this->publishes([
             $this->configPath($value.$this->ext) => config_path($value.$this->ext)
-        ], $this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->tag);
+        ], $this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->configTag);
 
         // Artisan::call('vendor:publish', [
         //     '--tag' => $this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->tag
         // ]);
+    }
+
+
+    public function publishesHelper($value) {
+        $this->publishes([
+            $this->helperPath($value.$this->ext) => app_path('Helper/'.$value.$this->ext)
+        ], $this->bagPrefix . $this->delimiter . $value . $this->delimiter . $this->helperTag);
     }
 
     /**
@@ -101,6 +112,16 @@ class CoreServiceProvider extends ServiceProvider {
      */
     private function configPath($filepath) {
         $dir = __DIR__.'/config';
+        return $dir .'/'. $filepath;
+    }
+
+    /**
+     * @name: LiShangHeng
+     * @info: 返回辅助函数目录
+     * @return string
+     */
+    private function helperPath($filepath) {
+        $dir = __DIR__.'/helper';
         return $dir .'/'. $filepath;
     }
 }
