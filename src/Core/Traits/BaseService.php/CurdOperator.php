@@ -3,7 +3,7 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-29 11:15:45
+ * @LastEditTime: 2021-01-29 14:29:23
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/CurdOperator.php
  */
 use Illuminate\Database\Eloquent\Model;
@@ -150,8 +150,8 @@ Trait CurdOperator {
         if($this->isOpenCache) {
             $this->autoDeleteCache();
             $this->cacheId = $id;
-            $result = $result->toArray();        
-            $this->setCache($result, __FUNCTION__);
+            $cache_result = $result->toArray();       
+            $this->setCache($cache_result, __FUNCTION__);
         }
         return $result;
     }
