@@ -2,8 +2,8 @@
 /*
  * @Date: 2021-01-21 14:09:18
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 15:05:30
- * @FilePath: /LshBags/src/Core/helper/arrayHelper.php
+ * @LastEditTime: 2021-01-29 12:20:04
+ * @FilePath: /LshBags/src/Core/helper/ezbagsHelper.php
  */
 
 if(!function_exists('array_insert')) {
@@ -73,5 +73,22 @@ if(!function_exists('array_move')) {
         array_unshift($compareArr, $array[$insert]);
         // 替换成新数组
         array_splice($array, $index, count($compareArr), $compareArr);
+    }
+}
+
+if(!function_exists('builder_sql')) {
+    /**
+     * @name: LiShangHeng
+     * @info: 把一个query builder的toSql和getBindings方法结合返回一个sql语句
+     * @param mixed builder
+     * @return string $sql
+     */    
+    function builder_sql($builder) {
+        $builderSql = $builder->toSql();
+        $bindings = $builder->getBindings();
+
+        $formatStr = str_replace(['?','%'], ['%s','%%'], $builderSql);
+        $executeSql = vsprintf($formatStr, $bindings);
+        return $executeSql;
     }
 }
