@@ -3,7 +3,7 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-26 18:38:40
+ * @LastEditTime: 2021-01-29 11:15:45
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/CurdOperator.php
  */
 use Illuminate\Database\Eloquent\Model;
@@ -35,28 +35,6 @@ Trait CurdOperator {
     public $model;
 
     /**
-     * 获取详情
-     * @param Model $model 传入模型
-     * @param int $id 活动id
-     * @return object
-     */
-    public function details(int $id) 
-    {
-        $this->setConstraintField();
-        $data = $this->model->findOrFail($id);
-
-        /* 缓存相关 */
-        if($this->isOpenCache) {
-            $cache = $this->getCache(__FUNCTION__);
-            $this->cacheId = $id;
-            $data = $cache ? $cache : $this->setCache($data->toArray(), __FUNCTION__);
-        }
-        return $data;
-    }
-
-    
-
-    /**
      * 获取列表
      * @param Model $model 传入模型
      * @param array $data 筛选数据
@@ -64,33 +42,76 @@ Trait CurdOperator {
      */
     public function list($data) 
     {
-        // 提前设置变量,这里不能移动
-        $cacheType = __FUNCTION__ . json_encode($data + $this->getPageData());
+        /* 缓存相关 */
+        if($this->isOpenCache) {
+             // 提前设置变量,这里不能移动
+            $cacheType = __FUNCTION__ . json_encode($data + $this->getPageData());
+            $cache = $this->getCache($cacheType);
+            if($cache) {                
+                $result = $cache;
+            } else {
+                $result = $this->listInstance($data);
+                $result = $this->setCache($result->toArray(), $cacheType);
+            }
+        } else {
+            $result = $this->listInstance($data);  
+        }
+        return $result;
+    }
+
+    /**
+     * @name: LiShangHeng
+     * @info: 获取
+     * @param {*}
+     * @return {*}
+     */
+    protected function listInstance($data) {
         /* 分页paginate */
         $this->decidePage($data);
         /* 过滤 */
         $this->filters($data);
         /* 设置默认限制 */
         $this->setConstraintField();
-        
         $list = $this->model;
         $result =  $this->hasPage ? $list->paginate($this->pageNum) : $list->get();
+        return $result;
+    }
 
-        
+
+    /**
+     * 获取详情模型
+     * @param Model $model 传入模型
+     * @param int $id 活动id
+     * @return Model $model 传入模型
+     */
+    protected function detailsInstance(int $id) {
+        $this->setConstraintField();
+        $data = $this->model->findOrFail($id);
+        return $data;
+    }
+
+    /**
+     * 获取详情
+     * @param Model $model 传入模型
+     * @param int $id 活动id
+     * @return object
+     */
+    public function details(int $id) 
+    {
         /* 缓存相关 */
         if($this->isOpenCache) {
-            // logger('进入缓存');
-            
-            $cache = $this->getCache($cacheType);
+            $cache = $this->getCache(__FUNCTION__);
+            $this->cacheId = $id;
             if($cache) {
-                
-                $result = $cache;
+                $data = $cache;
             } else {
-                $result = $this->setCache($result->toArray(), $cacheType);
+                $data = $this->detailsInstance($id);
+                $this->setCache($data->toArray(), __FUNCTION__);
             }
+        } else {
+            $data = $this->detailsInstance($id);
         }
-        
-        return $result;
+        return $data;
     }
 
     /**
@@ -107,7 +128,7 @@ Trait CurdOperator {
         $saveModel->saveOrFail();
         /* 自动删除设定好的缓存 */
         if($this->isOpenCache) {
-             $this->autoDeleteCache();
+            $this->autoDeleteCache();
         }
        
         return $saveModel;
@@ -117,14 +138,13 @@ Trait CurdOperator {
      * 更新数据
      * @param array $data 修改数据
      * @param  int $id 
-     * @return Model $model 传入模型
+     * @return array $data 传入修改数据
      */
     public function change($id, array $data) 
     {
         $changeModel = $this->detailsInstance($id);
         $this->setUpdataModel($changeModel,$data);
         $changeModel->saveOrFail();
-
         $result = $changeModel;
         /* 缓存相关 */
         if($this->isOpenCache) {
@@ -147,7 +167,7 @@ Trait CurdOperator {
         $result = $this->change($id, ['is_on' => 0]);
         /* 自动删除设定好的缓存 */
         if($this->isOpenCache) {
-             $this->autoDeleteCache();
+            $this->autoDeleteCache();
         }
         return $result;
     }
@@ -212,20 +232,11 @@ Trait CurdOperator {
      * @return {*}
      */
     public function checkModelExist(array $data, array $filterFields) {
-        $this->filterEqual($data, $filterFields);
+        $copyData = $data;
+        $this->filterEqual($copyData, $filterFields);
         $result = $this->model->exists();
         return $result;
     }
 
-    /**
-     * 获取详情模型
-     * @param Model $model 传入模型
-     * @param int $id 活动id
-     * @return object
-     */
-    protected function detailsInstance(int $id) {
-        $this->setConstraintField();
-        $data = $this->model->findOrFail($id);
-        return $data;
-    }
+    
 }
