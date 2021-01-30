@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-21 14:09:18
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-29 15:03:50
+ * @LastEditTime: 2021-01-30 14:23:29
  * @FilePath: /LshBags/src/Core/helper/ezbags.php
  */
 
@@ -90,5 +90,20 @@ if(!function_exists('builder_sql')) {
         $formatStr = str_replace(['?','%'], ['%s','%%'], $builderSql);
         $executeSql = vsprintf($formatStr, $bindings);
         return $executeSql;
+    }
+}
+
+if(!function_exists('array_swap')) {
+    /**
+     * @name: LiShangHeng
+     * @info: 交换两个索引值
+     * @param array &$array
+     * @param int $first
+     * @param int $second
+     */
+    function array_swap(&$array, $first, $second) {
+        $temp = $array[$first];
+        $array[$first] = $array[$second];
+        $array[$second] = $temp;
     }
 }
