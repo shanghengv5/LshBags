@@ -3,7 +3,7 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-30 14:33:02
+ * @LastEditTime: 2021-01-31 09:59:28
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/CurdOperator.php
  */
 use Illuminate\Database\Eloquent\Model;
@@ -77,7 +77,6 @@ Trait CurdOperator {
         $result =  $this->hasPage ? $list->paginate($this->pageNum) : $list->get();
         return $result;
     }
-
 
     /**
      * 获取详情模型
@@ -208,7 +207,13 @@ Trait CurdOperator {
      * @return {*}
      */
     public function setConstraintField() {
+        
         $keys = array_keys($this->constraintField);
+        $tableName = \Str::snake($this->modelName);
+        $tableName = str_replace('_service', '', $tableName);
+        array_walk($keys, function(&$value, $key) use($tableName){
+            $value = $tableName . '.' . $value;
+        });
         $this->filterEqual($this->constraintField, $keys);
         return;
     }
