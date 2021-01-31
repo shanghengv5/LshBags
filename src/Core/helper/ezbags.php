@@ -2,8 +2,8 @@
 /*
  * @Date: 2021-01-21 14:09:18
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-30 14:23:29
- * @FilePath: /LshBags/src/Core/helper/ezbags.php
+ * @LastEditTime: 2021-01-31 14:48:26
+ * @FilePath: /LshBags/src/Core/helper/Ezbags.php
  */
 
 if(!function_exists('array_insert')) {
@@ -102,8 +102,11 @@ if(!function_exists('array_swap')) {
      * @param int $second
      */
     function array_swap(&$array, $first, $second) {
-        $temp = $array[$first];
-        $array[$first] = $array[$second];
-        $array[$second] = $temp;
+        if($first != $second) {
+            $temp = $array[$first];
+            $array[$first] = $array[$second];
+            $array[$second] = $temp;
+        }
+        
     }
 }
