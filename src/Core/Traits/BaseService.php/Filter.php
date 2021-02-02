@@ -2,7 +2,7 @@
 /*
  * @Date: 2020-12-07 15:59:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-21 18:57:55
+ * @LastEditTime: 2021-02-02 15:09:52
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/Filter.php
  */
 namespace Lsh\Core\Traits\BaseService;
@@ -58,6 +58,15 @@ trait Filter {
 
     /**
      * @name: LiShangHeng
+     * @info: 连接表明
+     * @return String 
+     */
+    public function concatTableName($name) {
+        return $this->tableName . '.' . $name;
+    }
+
+    /**
+     * @name: LiShangHeng
      * @msg: 模糊查询
      * @param array $data 被过滤数据
      * @param array $filterNames 需要模糊搜索的名字
@@ -67,7 +76,7 @@ trait Filter {
     {
         foreach($filterNames as $name) {
             if(isset($data[$name])) {
-                $this->model = $this->model->where($name, 'like', $this->fuzzyQuery($data[$name]));
+                $this->model = $this->model->where($this->concatTableName($name), 'like', $this->fuzzyQuery($data[$name]));
                 if($dropData) {
                     unset($data[$name]);
                 }
@@ -84,7 +93,7 @@ trait Filter {
     protected function filterEqual(array &$data, array $filterNames, $dropData = true) {
         foreach($filterNames as $name) {
             if(isset($data[$name])) {
-                $this->model = $this->model->where($name, '=', $data[$name]);
+                $this->model = $this->model->where($this->concatTableName($name), '=', $data[$name]);
                 if($dropData) {
                     unset($data[$name]);
                 }
@@ -105,7 +114,7 @@ trait Filter {
             if(count($names) != 0 && isset($data[$names[0]]) && isset($data[$names[1]])) {
                 $min = $data[$names[0]];
                 $max = $data[$names[1]];
-                $flag ? $this->model = $this->model->whereBetween($key, [$min, $max]) : $this->model = $this->model->whereNotBetween($key, [$min, $max]);
+                $flag ? $this->model = $this->model->whereBetween($this->concatTableName($key), [$min, $max]) : $this->model = $this->model->whereNotBetween($this->concatTableName($key), [$min, $max]);
 
                 if($dropData) {
                     unset($data[$names[0]]);
@@ -135,7 +144,7 @@ trait Filter {
     protected function filterIns(array &$data, array $filterNames, $flag = true, $dropData = true) {
         foreach($filterNames as $name) {
             if(isset($data[$name]) && is_array($data[$name])) {
-                $flag ? $this->model = $this->model->whereIn($name, $data[$name]) : $this->model = $this->model->whereNotIn($name, $data[$name]);
+                $flag ? $this->model = $this->model->whereIn($this->concatTableName($name), $data[$name]) : $this->model = $this->model->whereNotIn($this->concatTableName($name), $data[$name]);
                 if($dropData) {
                     unset($data[$name]);
                 }

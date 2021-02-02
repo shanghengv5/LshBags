@@ -3,7 +3,7 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2020-12-07 15:57:48
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-31 09:59:28
+ * @LastEditTime: 2021-02-02 15:09:36
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/CurdOperator.php
  */
 use Illuminate\Database\Eloquent\Model;
@@ -47,7 +47,7 @@ Trait CurdOperator {
              // 提前设置变量,这里不能移动
             $cacheType = __FUNCTION__ . json_encode($data + $this->getPageData());
             $cache = $this->getCache($cacheType);
-            if($cache) { 
+            if($cache) {
                 $this->decidePage($data);               
                 $result = $cache;
             } else {
@@ -165,10 +165,7 @@ Trait CurdOperator {
     public function softDestroy($id) 
     {
         $result = $this->change($id, ['is_on' => 0]);
-        /* 自动删除设定好的缓存 */
-        if($this->isOpenCache) {
-            $this->autoDeleteCache();
-        }
+        
         return $result;
     }
 
@@ -207,16 +204,13 @@ Trait CurdOperator {
      * @return {*}
      */
     public function setConstraintField() {
-        
+        // logger('设置模型');
         $keys = array_keys($this->constraintField);
-        $tableName = \Str::snake($this->modelName);
-        $tableName = str_replace('_service', '', $tableName);
-        array_walk($keys, function(&$value, $key) use($tableName){
-            $value = $tableName . '.' . $value;
-        });
         $this->filterEqual($this->constraintField, $keys);
-        return;
+        
     }
+
+    
 
     /**
      * @name: LiShangHeng

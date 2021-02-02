@@ -3,7 +3,7 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2021-01-16 12:23:50
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-29 10:22:30
+ * @LastEditTime: 2021-02-02 15:10:00
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/Cache.php
  */
 
@@ -68,7 +68,7 @@ Trait Cache {
      * @return {*}
      */
     private function setOpenCache($val) {
-        $this->openCache = $val;
+        $this->isOpenCache = $val;
     }
 
     /**

@@ -3,13 +3,14 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2021-01-16 12:23:50
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-29 10:27:02
+ * @LastEditTime: 2021-02-02 15:09:11
  * @FilePath: /LshBags/src/Core/Traits/BaseService.php/Config.php
  */
 
 
 // 用于自动设置缓存
 Trait Config {
+    protected $tableName = '';
     /**
      * @name: LiShangHeng
      * @info: 获取配置
@@ -18,6 +19,8 @@ Trait Config {
         $this->config = config('ezbags.BaseService');
 
         $this->setRedisConfig();
+        
+        $this->setTableName();
     }
 
     /**
@@ -33,5 +36,15 @@ Trait Config {
         }
         /* redis认证 */
         $this->beginRedis();
+    }
+
+    /**
+     * @name: LiShangHeng
+     * @info: 设置表名
+     */
+    public function setTableName() {
+        $tableName = \Str::snake(class_basename($this));
+        $tableName = str_replace('_service', '', $tableName);
+        $this->tableName = $tableName;
     }
 }
