@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-22 11:56:45
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-23 18:27:51
+ * @LastEditTime: 2021-02-02 16:23:44
  * @FilePath: /LshBags/src/Core/Console/EzColumn.php
  */
 
@@ -59,7 +59,7 @@ class EzColumn extends Command
     public function handle()
     {
         $this->getCommandArguments();
-        
+        $this->dealNameArguments();
         $this->getColumns();
 
         $this->getFieldInfo();
