@@ -2,7 +2,7 @@
 /*
  * @Date: 2021-01-22 14:47:26
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-01-22 19:21:18
+ * @LastEditTime: 2021-02-24 10:04:23
  * @FilePath: /LshBags/src/Core/Console/Traits/EzCommand.php
  */
 
@@ -128,9 +128,9 @@ Trait EzCommand {
      * @param array $name
      * @return {*}
      */
-    public function getNamespace($name) {
+    public function getNamespace($name, $needPre = 1) {
         $prefix = '';
-        if($this->needPrefix == 1) {
+        if($this->needPrefix == 1 && $needPre) {
             foreach($name as $value) {
                 $prefix .= '\\' . Str::studly($value);
             }
