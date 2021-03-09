@@ -3,10 +3,9 @@ namespace Lsh\Core\Traits\BaseService;
 /*
  * @Date: 2021-01-16 12:23:50
  * @LastEditors: LiShangHeng
- * @LastEditTime: 2021-02-02 15:10:00
- * @FilePath: /LshBags/src/Core/Traits/BaseService.php/Cache.php
+ * @LastEditTime: 2021-03-09 14:58:32
+ * @FilePath: /LshBags/src/Core/Traits/BaseService/Cache.php
  */
-
 
 use Illuminate\Support\Facades\Redis;
 // 用于自动设置缓存
